@@ -1,16 +1,21 @@
-# dataverse
+# flutter_dataverse_azuread
 
-A new Flutter project.
+Sample flutter application to simulate connection to micorsoft dynamics using Azure AD and fetch accounts using the webAPI
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is an example of connection to micorsoft dynamics using Azure AD and fetch accounts using the webAPI
 
-A few resources to get you started if this is your first Flutter project:
+to us your owen Microsoft Dynamics API you have to change the following in the Respository : 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+  - url : the url of your dynamics application https://...dynamics.com
+  - version : the version of the applciation
+  - clientID
+  - AzureTenantID
+  - scope
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Used technologies
+
+  - Azure AD oauth2.0
+  - Microsoft Dynamics Dataverse
+  - webAPI
