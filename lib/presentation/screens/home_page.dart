@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
             _accountsDisplay = _accounts;
             //print(_accountsDisplay.length);
           });
-          await Future.delayed(const Duration(milliseconds: 3500), () {
+          await Future.delayed(const Duration(milliseconds: 2500), () {
             setState(() {
               _isLoading = false;
             });
@@ -144,20 +144,7 @@ class _HomePageState extends State<HomePage> {
                               child: Text(value),
                             );
                           }).toList(),
-                          onChanged: (state) {
-                            selectedState = state ?? "";
-                            state = (state == 'All') ? "" : state;
-                            state = state?.toLowerCase() ?? "";
-                            setState(() {
-                              _isLoading = true;
-                              _accountsDisplay = _accounts.where((u) {
-                                var aState = (u.address1Stateorprovince ?? "")
-                                    .toLowerCase();
-                                return aState.contains(state ?? "");
-                              }).toList();
-                              _isLoading = false;
-                            });
-                          },
+                          onChanged: (state) => filterState(state),
                         ),
                       ),
                       Expanded(
@@ -173,20 +160,7 @@ class _HomePageState extends State<HomePage> {
                               child: Text(value),
                             );
                           }).toList(),
-                          onChanged: (code) {
-                            selectedCode = code ?? "";
-                            code = (code == 'All') ? "" : code;
-                            code = code?.toLowerCase() ?? "";
-                            setState(() {
-                              _isLoading = true;
-                              _accountsDisplay = _accounts.where((u) {
-                                var aCode =
-                                    (u.statecode.toString()).toLowerCase();
-                                return aCode.contains(code ?? "");
-                              }).toList();
-                              _isLoading = false;
-                            });
-                          },
+                          onChanged: (code) => filterCode(code),
                         ),
                       ),
                       Expanded(
@@ -195,7 +169,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Expanded(
                         flex: 1,
-                        child: GridBtnWidget(key : Key("btn_grid"),notifyParent: setGrid),
+                        child: GridBtnWidget(
+                            key: Key("btn_grid"), notifyParent: setGrid),
                       ),
                     ],
                   ),
@@ -216,7 +191,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  search(searchText) {
+  search(searchText) async {
     searchText = searchText.toLowerCase();
     setState(() {
       _isLoading = true;
@@ -226,7 +201,11 @@ class _HomePageState extends State<HomePage> {
         var fNumber = (u.accountnumber ?? "").toLowerCase();
         return fName.contains(searchText) || fNumber.contains(searchText);
       }).toList();
-      _isLoading = false;
+    });
+    await Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        _isLoading = false;
+      });
     });
   }
 
@@ -239,6 +218,44 @@ class _HomePageState extends State<HomePage> {
   setList() {
     setState(() {
       _isGrid = false;
+    });
+  }
+
+  filterState(state) async {
+    selectedState = state ?? "";
+    state = (state == 'All') ? "" : state;
+    state = state?.toLowerCase() ?? "";
+    setState(() {
+      _isLoading = true;
+      _accountsDisplay = _accounts.where((u) {
+        var aState = (u.address1Stateorprovince ?? "").toLowerCase();
+        return aState.contains(state ?? "");
+      }).toList();
+    });
+
+    await Future.delayed(const Duration(milliseconds: 800), () {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+  }
+
+  filterCode(code) async {
+    selectedCode = code ?? "";
+    code = (code == 'All') ? "" : code;
+    code = code?.toLowerCase() ?? "";
+    setState(() {
+      _isLoading = true;
+      _accountsDisplay = _accounts.where((u) {
+        var aCode = (u.statecode.toString()).toLowerCase();
+        return aCode.contains(code ?? "");
+      }).toList();
+    });
+
+    await Future.delayed(const Duration(milliseconds: 800), () {
+      setState(() {
+        _isLoading = false;
+      });
     });
   }
 }
