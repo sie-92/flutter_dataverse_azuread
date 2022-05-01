@@ -1,0 +1,40 @@
+name: dataverse
+description: dataverse.
+
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.16.1 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+  #http service
+  http: ^0.13.4
+
+  #emails send
+  url_launcher: ^6.0.9
+
+  #animation lottie file
+  lottie: ^1.1.0
+  oauth2: ^2.0.0
+
+  #azure ad
+  flutter_aad_oauth: ^2.3.0
+
+  shimmer: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/dots.json
+    - assets/account.png
