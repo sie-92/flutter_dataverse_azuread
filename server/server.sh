@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Set the port
-PORT=5000
+PORT=80
 
 # Stop any program currently running on the set port
 echo 'preparing port' $PORT '...'
-fuser -k 5000/tcp
+fuser -k 80/tcp
 
 # switch directories
 cd build/web/
