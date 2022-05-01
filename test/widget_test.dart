@@ -5,9 +5,12 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:dataverse/data/account.dart';
 import 'package:dataverse/presentation/screens/home_page.dart';
 import 'package:dataverse/presentation/widgets/accounts_grid_view_widget.dart';
+import 'package:dataverse/presentation/widgets/accounts_list_view_widget.dart';
 import 'package:dataverse/presentation/widgets/grid_btn_widget.dart';
+import 'package:dataverse/presentation/widgets/list_btn_widget.dart';
 import 'package:dataverse/presentation/widgets/preloader_widget.dart';
 import 'package:dataverse/presentation/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
@@ -36,31 +39,44 @@ void main() {
   });
 
   testWidgets('test_grid_btn', (WidgetTester tester) async {
-    /*await tester.pumpWidget(MaterialApp(
-      home: Material(
-          child: GridBtnWidget(notifyParent: () {HomePa})),
-    ));*/
-
     await tester.pumpWidget(MaterialApp(
-      home: Material(
-          child: HomePage()),
+      home: Material(child: GridBtnWidget(notifyParent: () {})),
     ));
-    //await tester.pumpWidget(HomePage());
-    await tester.pump();
 
     final btnGrid = find.byKey(ValueKey("btn_grid"), skipOffstage: false);
 
     expect(btnGrid, findsOneWidget);
-    await tester.tap(btnGrid);
+  });
 
-    await tester.pumpAndSettle();
+  testWidgets('test_list_btn', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: Material(child: ListBtnWidget(notifyParent: () {})),
+    ));
 
-    final grid = find.byType(AccountsGridViewWidget);
+    final btnList = find.byKey(ValueKey("btn_list"), skipOffstage: false);
+
+    expect(btnList, findsOneWidget);
+  });
+
+  testWidgets('test_list', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+        home: Material(
+      child: AccountsListViewWidget(accounts: [], accountsDisplay: []),
+    )));
+
+    final list = find.byKey(ValueKey("list"), skipOffstage: false);
+
+    expect(list, findsOneWidget);
+  });
+
+    testWidgets('test_grid', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+        home: Material(
+      child: AccountsGridViewWidget(accounts: [], accountsDisplay: []),
+    )));
+
+    final grid = find.byKey(ValueKey("grid"), skipOffstage: false);
+
     expect(grid, findsOneWidget);
-
-    //final list = find.byKey(ValueKey("list"));
-    //expect(list, findsNothing);
-
-
   });
 }
