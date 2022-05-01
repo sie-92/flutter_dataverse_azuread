@@ -21,4 +21,4 @@ to us your owen Microsoft Dynamics API you have to change the following in the R
   - webAPI
 
 #### Demo
-https://github.com/sie-92/flutter_dataverse_azuread/blob/master/dataverse.gif
+![](https://github.com/sie-92/flutter_dataverse_azuread/blob/master/dataverse.gif)
