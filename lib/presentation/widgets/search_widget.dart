@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class SearchWidget extends StatelessWidget {
   final Function(String) notifyParent;
+  String curText = "";
 
-  SearchWidget({Key? key, required this.notifyParent(String str) })
+  SearchWidget({Key? key, required this.notifyParent(String str)})
       : super(key: key);
 
   @override
@@ -13,11 +14,16 @@ class SearchWidget extends StatelessWidget {
       padding: EdgeInsets.all(12.0),
       child: TextField(
         autofocus: false,
-        onChanged: (searchText) => notifyParent(searchText),
+
+        onSubmitted: (searchText) => notifyParent(searchText),
+        onChanged: (searchText) => {curText = searchText},
         // controller: _textController,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
-          prefixIcon: Icon(Icons.search),
+          suffixIcon: IconButton(
+            icon: new Icon(Icons.search),
+            onPressed: () => notifyParent(curText),
+          ),
           hintText: 'Search Accounts',
         ),
       ),

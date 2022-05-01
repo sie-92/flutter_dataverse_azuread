@@ -24,12 +24,7 @@ var authorizationEndpoint = Uri.parse("https://login.microsoftonline.com/" +
     azureTenantId +
     "/oauth2/token?resource=" +
     url);
-//final username = 'ie.sakraoui@SIE92.onmicrosoft.com';
-//final password = 'imed4633@@';
 
-//final secret = '';
-//final redirectUrl = "https://callbackurl";
-//final scope = "api://"+clientId+"/scope";
 final scope = url + "/.default";
 String? accessToken = "";
 final currentUri = Uri.base;

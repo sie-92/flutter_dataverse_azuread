@@ -207,6 +207,7 @@ class _HomePageState extends State<HomePage> {
         _isLoading = false;
       });
     });
+    
   }
 
   setGrid() {
